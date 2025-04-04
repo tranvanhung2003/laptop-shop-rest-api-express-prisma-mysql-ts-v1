@@ -26,5 +26,10 @@
   "homepage": "https://github.com/tranvanhung2003/laptop-shop-web-express-v1#readme",
   "dependencies": {
     "express": "5.0.1"
+  },
+  "devDependencies": {
+    "@types/express": "5.0.0",
+    "@types/node": "22.10.7",
+    "typescript": "5.7.3"
   }
 }
