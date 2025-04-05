@@ -37,6 +37,7 @@
   },
   "homepage": "https://github.com/tranvanhung2003/laptop-shop-web-express-v1#readme",
   "dependencies": {
+    "dotenv": "16.4.7",
     "express": "5.0.1"
   },
   "devDependencies": {
