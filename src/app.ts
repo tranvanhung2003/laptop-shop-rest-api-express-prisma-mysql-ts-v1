@@ -4,12 +4,17 @@ import "dotenv/config";
 const app = express();
 const PORT = process.env.PORT || 8080;
 
+// config view engine (template engine)
+app.set("view engine", "ejs");
+// app.set("views", `${__dirname}/views`);
+app.set("views", "./src/views");
+
 app.get("/", (req, res) => {
-  res.send(`<h1 style="color: red">Hello World nodemon</h1>`);
+  res.render("home.ejs");
 });
 
 app.get("/tvhung", (req, res) => {
-  res.send("Hello tvhung");
+  res.send("Hello tran van hung");
 });
 
 app.get("/abc", (req, res) => {
@@ -18,4 +23,5 @@ app.get("/abc", (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`My app is running on port: ${PORT}`);
+  // console.log(`${__dirname}/views`);
 });
