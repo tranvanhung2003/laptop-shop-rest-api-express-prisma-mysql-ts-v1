@@ -24,7 +24,7 @@
           align-items: center;
         "
       >
-        <h1>List Users: <%= name %></h1>
+        <h1>List Users:</h1>
         <div>
           <a href="/create-user" class="btn btn-warning">Create a new user</a>
         </div>
@@ -42,15 +42,17 @@
             </tr>
           </thead>
           <tbody>
+            <% users.forEach(user => { %>
             <tr>
-              <td>Alfreds Futterkiste</td>
-              <td>Maria Anders</td>
-              <td>Germany</td>
-              <td>Germany</td>
+              <td><%= user.id %></td>
+              <td><%= user.name %></td>
+              <td><%= user.email%></td>
+              <td><%= user.address %></td>
               <td>
                 <button class="btn btn-danger">Delete</button>
               </td>
             </tr>
+            <% }) %>
           </tbody>
         </table>
       </div>
