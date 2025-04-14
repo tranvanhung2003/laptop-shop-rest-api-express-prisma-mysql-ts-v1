@@ -1,7 +1,7 @@
 {
-  "name": "laptop-shop-web-express-v1",
+  "name": "side-project-express-v1",
   "version": "1.0.0",
-  "description": "laptop shop web express v1",
+  "description": "side project express v1",
   "main": "dist/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -21,7 +21,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tranvanhung2003/laptop-shop-web-express-v1.git"
+    "url": "git+https://github.com/tranvanhung2003/side-project-express-v1.git"
   },
   "keywords": [
     "nodejs",
@@ -34,9 +34,9 @@
   },
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/tranvanhung2003/laptop-shop-web-express-v1/issues"
+    "url": "https://github.com/tranvanhung2003/side-project-express-v1/issues"
   },
-  "homepage": "https://github.com/tranvanhung2003/laptop-shop-web-express-v1#readme",
+  "homepage": "https://github.com/tranvanhung2003/side-project-express-v1#readme",
   "dependencies": {
     "@prisma/client": "6.3.0",
     "dotenv": "16.4.7",
