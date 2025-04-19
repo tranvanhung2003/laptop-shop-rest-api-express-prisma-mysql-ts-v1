@@ -24,6 +24,12 @@ const getAllUsers = async () => {
   return users;
 };
 
+const getAllRoles = async () => {
+  const roles = await prisma.role.findMany();
+
+  return roles;
+};
+
 const handleDeleteUser = async (id: string) => {
   const deletedUser = await prisma.user.delete({ where: { id: +id } });
 
@@ -59,6 +65,7 @@ const updateUserById = async (
 export {
   handleCreateUser,
   getAllUsers,
+  getAllRoles,
   handleDeleteUser,
   getUserById,
   updateUserById,
