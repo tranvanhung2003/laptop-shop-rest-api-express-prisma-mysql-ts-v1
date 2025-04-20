@@ -14,26 +14,6 @@ const initDatabase = async () => {
     return;
   }
 
-  if (countUser === 0) {
-    const defaultPassword = await hashPassword("123456");
-    await prisma.user.createMany({
-      data: [
-        {
-          fullName: "Trần Văn Hưng",
-          username: "tvhung@gmail.com",
-          password: defaultPassword,
-          accountType: ACCOUNT_TYPE.SYSTEM,
-        },
-        {
-          fullName: "Admin",
-          username: "admin@gmail.com",
-          password: defaultPassword,
-          accountType: ACCOUNT_TYPE.SYSTEM,
-        },
-      ],
-    });
-  }
-
   if (countRole === 0) {
     await prisma.role.createMany({
       data: [
@@ -41,6 +21,32 @@ const initDatabase = async () => {
         { name: "USER", description: "User thông thường" },
       ],
     });
+  }
+
+  if (countUser === 0) {
+    const defaultPassword = await hashPassword("123456");
+    const adminRole = await prisma.role.findFirst({ where: { name: "ADMIN" } });
+
+    if (adminRole) {
+      await prisma.user.createMany({
+        data: [
+          {
+            fullName: "Trần Văn Hưng",
+            username: "tvhung@gmail.com",
+            password: defaultPassword,
+            accountType: ACCOUNT_TYPE.SYSTEM,
+            roleId: adminRole.id,
+          },
+          {
+            fullName: "Admin",
+            username: "admin@gmail.com",
+            password: defaultPassword,
+            accountType: ACCOUNT_TYPE.SYSTEM,
+            roleId: adminRole.id,
+          },
+        ],
+      });
+    }
   }
 };
 
