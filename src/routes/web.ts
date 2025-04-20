@@ -13,7 +13,9 @@ import {
   getAdminProductPage,
   getAdminOrderPage,
 } from "controllers/admin/dashboard.controller";
+import multer from "multer";
 
+const upload = multer({ dest: "uploads/" });
 const router = express.Router();
 
 const webRoutes = (app: Express) => {

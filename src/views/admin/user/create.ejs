@@ -48,7 +48,11 @@
               <div class="col-6 mx-auto">
                 <div>
                   <h5 style="padding: 10px 0">Create a user:</h5>
-                  <form action="/admin/handle-create-user" method="post">
+                  <form
+                    action="/admin/handle-create-user"
+                    method="post"
+                    enctype="multipart/form-data"
+                  >
                     <div class="mb-3">
                       <label class="form-label">Full name:</label>
                       <input
@@ -86,6 +90,7 @@
                     <div class="mb-3">
                       <label for="formFile" class="form-label">Avatar</label>
                       <input
+                        name="avatar"
                         class="form-control"
                         type="file"
                         id="avatarFile"
