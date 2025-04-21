@@ -11,13 +11,13 @@ import {
 const getHomePage = async (req: Request, res: Response) => {
   const users = await getAllUsers();
 
-  return res.render("home", { users: users });
+  return res.render("home", { users });
 };
 
 const getCreateUserPage = async (req: Request, res: Response) => {
   const roles = await getAllRoles();
 
-  return res.render("admin/user/create", { roles: roles });
+  return res.render("admin/user/create", { roles });
 };
 
 const postCreateUser = async (req: Request, res: Response) => {
@@ -35,7 +35,7 @@ const postDeleteUser = async (req: Request, res: Response) => {
 
   await handleDeleteUser(id);
 
-  return res.redirect("/");
+  return res.redirect("/admin/user");
 };
 
 const getViewUser = async (req: Request, res: Response) => {
@@ -43,8 +43,9 @@ const getViewUser = async (req: Request, res: Response) => {
 
   // get user by id
   const user = await getUserById(id);
+  const roles = await getAllRoles();
 
-  return res.render("view-user", { id: id, user: user });
+  return res.render("admin/user/detail", { id, user, roles });
 };
 
 const postUpdateUser = async (req: Request, res: Response) => {
