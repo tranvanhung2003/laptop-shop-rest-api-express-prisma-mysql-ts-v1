@@ -49,10 +49,16 @@
                 <div>
                   <h5 style="padding: 10px 0">View detail a user:</h5>
                   <form
-                    action="/admin/handle-create-user"
+                    action="/admin/update-user"
                     method="post"
                     enctype="multipart/form-data"
                   >
+                    <input
+                      value="<%= user.id %>"
+                      name="id"
+                      type="text"
+                      style="display: none"
+                    />
                     <div class="mb-3">
                       <label class="form-label">Full name:</label>
                       <input
@@ -66,6 +72,7 @@
                     <div class="mb-3">
                       <label class="form-label">Email:</label>
                       <input
+                        disabled
                         value="<%= user.username %>"
                         name="username"
                         type="email"
@@ -104,11 +111,20 @@
                         accept=".png, .jpg, .jpeg"
                       />
                     </div>
+                    <% if (user.avatar) { %>
+                    <img
+                      style="max-height: 250px; display: block"
+                      alt="avatar preview"
+                      id="avatarPreview"
+                      src="/images/<%= user.avatar %>"
+                    />
+                    <% } else { %>
                     <img
                       style="max-height: 250px; display: none"
                       alt="avatar preview"
                       id="avatarPreview"
                     />
+                    <% } %>
                     <div class="mb-3">
                       <label class="form-label">Address:</label>
                       <textarea name="address" class="form-control" rows="2">
