@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { createProduct } from "services/admin/product.service";
 import {
   ProductSchema,
   TypeProductSchema,
@@ -19,7 +20,7 @@ const getAdminCreateProductPage = (req: Request, res: Response) => {
   return res.render("admin/product/create", { errors, oldData });
 };
 
-const postAdminCreateProduct = (req: Request, res: Response) => {
+const postAdminCreateProduct = async (req: Request, res: Response) => {
   const { name, price, detailDesc, shortDesc, quantity, factory, target } =
     req.body as TypeProductSchema;
 
@@ -43,6 +44,18 @@ const postAdminCreateProduct = (req: Request, res: Response) => {
   }
 
   // success
+  const image = req?.file?.filename ?? null;
+  await createProduct(
+    name,
+    +price,
+    detailDesc,
+    shortDesc,
+    +quantity,
+    factory,
+    target,
+    image
+  );
+
   return res.redirect("/admin/product");
 };
 
