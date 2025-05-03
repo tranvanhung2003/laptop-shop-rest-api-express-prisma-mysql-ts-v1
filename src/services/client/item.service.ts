@@ -6,4 +6,8 @@ const getProducts = async () => {
   return products;
 };
 
-export { getProducts };
+const getProductById = async (id: number) => {
+  return await prisma.product.findUnique({ where: { id } });
+};
+
+export { getProducts, getProductById };
