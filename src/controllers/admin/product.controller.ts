@@ -14,10 +14,10 @@ const getAdminCreateProductPage = (req: Request, res: Response) => {
   const errors = [];
   const oldData = {
     name: "",
-    price: "",
+    price: 0,
     detailDesc: "",
     shortDesc: "",
-    quantity: "",
+    quantity: 0,
     factory: "",
     target: "",
   };
@@ -33,8 +33,11 @@ const postAdminCreateProduct = async (req: Request, res: Response) => {
 
   if (!validate.success) {
     // error
-    const errorZod = validate.error.issues;
-    const errors = errorZod.map((item) => `${item.message} (${item.path[0]})`);
+    const errorsZod = validate.error.issues;
+    const errors = errorsZod?.map(
+      (item) => `${item.message} (${item.path[0]})`
+    );
+
     const oldData = {
       name,
       price,
@@ -122,8 +125,8 @@ const postUpdateProduct = async (req: Request, res: Response) => {
 
 export {
   getAdminCreateProductPage,
+  getViewProduct,
   postAdminCreateProduct,
   postDeleteProduct,
-  getViewProduct,
   postUpdateProduct,
 };
