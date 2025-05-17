@@ -1,4 +1,4 @@
-import { number, string, z } from "zod";
+import { z } from "zod";
 
 const ProductSchema = z.object({
   id: z.string().optional(),

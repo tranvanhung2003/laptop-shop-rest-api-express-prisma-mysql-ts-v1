@@ -1,20 +1,9 @@
-import express, { Express } from "express";
 import {
-  getCreateUserPage,
-  getHomePage,
-  postCreateUser,
-  postDeleteUser,
-  getViewUser,
-  postUpdateUser,
-} from "controllers/user.controller";
-import {
-  getDashboardPage,
-  getAdminUserPage,
-  getAdminProductPage,
   getAdminOrderPage,
+  getAdminProductPage,
+  getAdminUserPage,
+  getDashboardPage,
 } from "controllers/admin/dashboard.controller";
-import fileUploadMiddleware from "src/middleware/multer";
-import { getProductPage } from "controllers/client/product.controller";
 import {
   getAdminCreateProductPage,
   getViewProduct,
@@ -22,6 +11,17 @@ import {
   postDeleteProduct,
   postUpdateProduct,
 } from "controllers/admin/product.controller";
+import { getProductPage } from "controllers/client/product.controller";
+import {
+  getCreateUserPage,
+  getHomePage,
+  getViewUser,
+  postCreateUser,
+  postDeleteUser,
+  postUpdateUser,
+} from "controllers/user.controller";
+import express, { Express } from "express";
+import fileUploadMiddleware from "src/middleware/multer";
 
 const router = express.Router();
 
