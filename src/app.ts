@@ -24,6 +24,11 @@ webRoutes(app);
 // seeding data
 initDatabase();
 
+// handle 404 not found
+app.use((req, res) => {
+  res.send("404 not found");
+});
+
 app.listen(PORT, () => {
   console.log(`My app is running on port: ${PORT}`);
   // console.log(`${__dirname}/views`);
