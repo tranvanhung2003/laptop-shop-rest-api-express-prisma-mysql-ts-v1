@@ -1,6 +1,7 @@
 import initDatabase from "config/seed";
 import "dotenv/config";
 import express from "express";
+import path from "path";
 import webRoutes from "routes/web";
 
 const app = express();
@@ -8,7 +9,7 @@ const PORT = process.env.PORT || 8080;
 
 // config view engine (template engine)
 app.set("view engine", "ejs");
-app.set("views", "src/views"); // app.set("views", `${__dirname}/views`);
+app.set("views", path.join(__dirname, "views")); // app.set("views", `${__dirname}/views`);
 
 // config req.body
 app.use(express.json());
