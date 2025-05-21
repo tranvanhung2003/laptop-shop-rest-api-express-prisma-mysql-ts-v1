@@ -18,7 +18,12 @@ const getRegisterPage = async (req: Request, res: Response) => {
 };
 
 const getLoginPage = async (req: Request, res: Response) => {
-  return res.render("client/auth/login");
+  const messages = (req as any)?.session?.messages ?? [];
+  if ((req as any)?.session?.messages) {
+    (req as any).session.messages = [];
+  }
+
+  return res.render("client/auth/login", { messages });
 };
 
 const postRegister = async (req: Request, res: Response) => {
