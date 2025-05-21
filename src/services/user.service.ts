@@ -1,11 +1,15 @@
+import bcrypt from "bcrypt";
 import { prisma } from "config/client";
 import { ACCOUNT_TYPE } from "config/constant";
-import bcrypt from "bcrypt";
 
 const saltRounds = 10;
 
 const hashPassword = async (plainText: string) => {
   return await bcrypt.hash(plainText, saltRounds);
+};
+
+const comparePassword = async (plainText: string, hashPassword: string) => {
+  return await bcrypt.compare(plainText, hashPassword);
 };
 
 const handleCreateUser = async (
@@ -80,11 +84,12 @@ const updateUserById = async (
 };
 
 export {
-  handleCreateUser,
-  getAllUsers,
+  comparePassword,
   getAllRoles,
-  handleDeleteUser,
+  getAllUsers,
   getUserById,
-  updateUserById,
+  handleCreateUser,
+  handleDeleteUser,
   hashPassword,
+  updateUserById,
 };

@@ -26,6 +26,7 @@ import {
   postUpdateUser,
 } from "controllers/user.controller";
 import express, { Express } from "express";
+import passport from "passport";
 import fileUploadMiddleware from "src/middleware/multer";
 
 const router = express.Router();
@@ -34,6 +35,13 @@ const webRoutes = (app: Express) => {
   router.get("/", getHomePage);
   router.get("/product/:id", getProductPage);
   router.get("/login", getLoginPage);
+  router.post(
+    "/login",
+    passport.authenticate("local", {
+      successRedirect: "/",
+      failureRedirect: "/login",
+    })
+  );
   router.get("/register", getRegisterPage);
   router.post("/register", postRegister);
 
