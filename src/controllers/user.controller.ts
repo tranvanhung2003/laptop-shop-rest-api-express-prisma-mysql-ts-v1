@@ -1,12 +1,11 @@
 import { Request, Response } from "express";
 import { getProducts } from "services/client/item.service";
 import {
-  getAllUsers,
+  getAllRoles,
+  getUserById,
   handleCreateUser,
   handleDeleteUser,
-  getUserById,
   updateUserById,
-  getAllRoles,
 } from "services/user.service";
 
 const getHomePage = async (req: Request, res: Response) => {
@@ -62,10 +61,10 @@ const postUpdateUser = async (req: Request, res: Response) => {
 };
 
 export {
-  getHomePage,
   getCreateUserPage,
+  getHomePage,
+  getViewUser,
   postCreateUser,
   postDeleteUser,
-  getViewUser,
   postUpdateUser,
 };

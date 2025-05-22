@@ -1,7 +1,9 @@
+import { PrismaClient } from "@prisma/client";
+import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 import initDatabase from "config/seed";
 import "dotenv/config";
 import express from "express";
-import session from "express-session";
+import expressSession from "express-session";
 import passport from "passport";
 import path from "path";
 import webRoutes from "routes/web";
@@ -23,10 +25,18 @@ app.use(express.static("public"));
 
 // config session
 app.use(
-  session({
-    secret: "keyboard cat",
-    resave: false,
+  expressSession({
+    cookie: {
+      maxAge: 7 * 24 * 60 * 60 * 1000, // ms
+    },
+    secret: "a santa at nasa",
+    resave: true,
     saveUninitialized: true,
+    store: new PrismaSessionStore(new PrismaClient(), {
+      checkPeriod: 2 * 60 * 1000, // ms
+      dbRecordIdIsSessionId: true,
+      dbRecordIdFunction: undefined,
+    }),
   })
 );
 
