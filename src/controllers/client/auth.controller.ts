@@ -19,7 +19,7 @@ const getRegisterPage = async (req: Request, res: Response) => {
 
 const getLoginPage = async (req: Request, res: Response) => {
   const messages = (req as any)?.session?.messages ?? [];
-  if (messages.length !== 0) {
+  if (messages.length) {
     (req as any).session.messages = [];
   }
 
