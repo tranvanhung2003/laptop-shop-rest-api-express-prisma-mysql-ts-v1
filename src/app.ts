@@ -30,9 +30,14 @@ app.use(
       maxAge: 7 * 24 * 60 * 60 * 1000, // ms
     },
     secret: "a santa at nasa",
-    resave: true,
-    saveUninitialized: true,
+
+    // forces session save even if unchanged
+    resave: false,
+
+    // saves unmodified sessions
+    saveUninitialized: false,
     store: new PrismaSessionStore(new PrismaClient(), {
+      // clears expired sessions every 1 day
       checkPeriod: 2 * 60 * 1000, // ms
       dbRecordIdIsSessionId: true,
       dbRecordIdFunction: undefined,
@@ -45,6 +50,12 @@ app.use(passport.initialize());
 app.use(passport.authenticate("session"));
 
 configPassportLocal();
+
+// config global
+app.use((req, res, next) => {
+  res.locals.user = req.user || null; // pass user object to all views
+  next();
+});
 
 // config routes
 webRoutes(app);
