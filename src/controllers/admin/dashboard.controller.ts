@@ -22,8 +22,8 @@ const getAdminOrderPage = async (req: Request, res: Response) => {
 };
 
 export {
-  getDashboardPage,
-  getAdminUserPage,
-  getAdminProductPage,
   getAdminOrderPage,
+  getAdminProductPage,
+  getAdminUserPage,
+  getDashboardPage,
 };

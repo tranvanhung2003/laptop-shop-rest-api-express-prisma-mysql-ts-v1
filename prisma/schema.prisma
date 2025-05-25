@@ -29,7 +29,7 @@ model User {
   phone       String? @db.VarChar(255)
   accountType String  @db.VarChar(50)
   avatar      String? @db.VarChar(255)
-  Role        Role    @relation(fields: [roleId], references: [id])
+  role        Role    @relation(fields: [roleId], references: [id])
   roleId      Int
 
   @@map("users")

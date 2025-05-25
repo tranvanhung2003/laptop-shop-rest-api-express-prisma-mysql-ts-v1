@@ -1,3 +1,4 @@
+import { ROLE_NAME } from "config/constant";
 import { Request, Response } from "express";
 import { registerNewUser } from "services/client/auth.service";
 import {
@@ -50,4 +51,14 @@ const postRegister = async (req: Request, res: Response) => {
   return res.redirect("/login");
 };
 
-export { getLoginPage, getRegisterPage, postRegister };
+const getSuccessRedirectPage = (req: Request, res: Response) => {
+  const user = req.user as any;
+
+  if (user?.role?.name === ROLE_NAME.ADMIN) {
+    res.redirect("/admin");
+  } else {
+    res.redirect("/");
+  }
+};
+
+export { getLoginPage, getRegisterPage, getSuccessRedirectPage, postRegister };
