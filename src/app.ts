@@ -55,7 +55,7 @@ configPassportLocal();
 // config global
 app.use((req, res, next) => {
   res.locals.user = req.user || null; // pass user object to all views
-  next();
+  return next();
 });
 
 // config routes
@@ -67,6 +67,7 @@ initDatabase();
 // handle 404 not found
 app.use((req, res) => {
   res.send("404 not found");
+  return;
 });
 
 app.listen(PORT, () => {

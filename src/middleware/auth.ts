@@ -7,7 +7,7 @@ const isLogin = (req: Request, res: Response, next: NextFunction) => {
   if (isAuthenticated) {
     return res.redirect("/");
   } else {
-    next();
+    return next();
   }
 };
 
@@ -15,7 +15,7 @@ const isAdmin = (req: Request, res: Response, next: NextFunction) => {
   const user = req.user;
 
   if (user?.role?.name === ROLE_NAME.ADMIN) {
-    next();
+    return next();
   } else {
     return res.redirect("/");
   }
