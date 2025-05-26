@@ -1,5 +1,5 @@
 import { ROLE_NAME } from "config/constant";
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { registerNewUser } from "services/client/auth.service";
 import {
   RegisterSchema,
@@ -52,13 +52,28 @@ const postRegister = async (req: Request, res: Response) => {
 };
 
 const getSuccessRedirectPage = (req: Request, res: Response) => {
-  const user = req.user as any;
+  const user = req.user;
 
   if (user?.role?.name === ROLE_NAME.ADMIN) {
-    res.redirect("/admin");
+    return res.redirect("/admin");
   } else {
-    res.redirect("/");
+    return res.redirect("/");
   }
 };
 
-export { getLoginPage, getRegisterPage, getSuccessRedirectPage, postRegister };
+const postLogout = (req: Request, res: Response, next: NextFunction) => {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    return res.redirect("/");
+  });
+};
+
+export {
+  getLoginPage,
+  getRegisterPage,
+  getSuccessRedirectPage,
+  postLogout,
+  postRegister,
+};

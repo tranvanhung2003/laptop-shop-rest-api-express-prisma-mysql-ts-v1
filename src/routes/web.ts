@@ -15,6 +15,7 @@ import {
   getLoginPage,
   getRegisterPage,
   getSuccessRedirectPage,
+  postLogout,
   postRegister,
 } from "controllers/client/auth.controller";
 import { getProductPage } from "controllers/client/product.controller";
@@ -46,6 +47,7 @@ const webRoutes = (app: Express) => {
       failureMessage: true,
     })
   );
+  router.post("/logout", postLogout);
   router.get("/register", getRegisterPage);
   router.post("/register", postRegister);
 

@@ -1,3 +1,4 @@
+/// <reference path="./types/index.d.ts" />
 import { PrismaClient } from "@prisma/client";
 import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 import initDatabase from "config/seed";

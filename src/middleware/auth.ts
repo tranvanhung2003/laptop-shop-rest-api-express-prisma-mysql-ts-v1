@@ -5,20 +5,19 @@ const isLogin = (req: Request, res: Response, next: NextFunction) => {
   const isAuthenticated = req.isAuthenticated();
 
   if (isAuthenticated) {
-    res.redirect("/");
+    return res.redirect("/");
   } else {
     next();
   }
 };
 
 const isAdmin = (req: Request, res: Response, next: NextFunction) => {
-  const user = req.user as any;
+  const user = req.user;
 
   if (user?.role?.name === ROLE_NAME.ADMIN) {
-    // res.redirect("/admin");
     next();
   } else {
-    res.redirect("/");
+    return res.redirect("/");
   }
 };
 
