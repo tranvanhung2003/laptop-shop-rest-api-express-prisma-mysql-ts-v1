@@ -29,18 +29,22 @@ import {
 } from "controllers/user.controller";
 import express, { Express } from "express";
 import passport from "passport";
-import { isAdmin, isLogin } from "src/middleware/auth";
+import { isAdmin, redirectIfAuthenticated } from "src/middleware/auth";
 import fileUploadMiddleware from "src/middleware/multer";
 
 const router = express.Router();
 
 const webRoutes = (app: Express) => {
+  // config middleware isAdmin
+  router.use("/admin", isAdmin);
+
   router.get("/", getHomePage);
   router.get("/success-redirect", getSuccessRedirectPage);
   router.get("/product/:id", getProductPage);
-  router.get("/login", isLogin, getLoginPage);
+  router.get("/login", redirectIfAuthenticated, getLoginPage);
   router.post(
     "/login",
+    redirectIfAuthenticated,
     passport.authenticate("local", {
       successRedirect: "/success-redirect",
       failureRedirect: "/login",
@@ -48,11 +52,11 @@ const webRoutes = (app: Express) => {
     })
   );
   router.post("/logout", postLogout);
-  router.get("/register", getRegisterPage);
-  router.post("/register", postRegister);
+  router.get("/register", redirectIfAuthenticated, getRegisterPage);
+  router.post("/register", redirectIfAuthenticated, postRegister);
 
   // admin routes
-  router.get("/admin", isAdmin, getDashboardPage);
+  router.get("/admin", getDashboardPage);
   router.get("/admin/user", getAdminUserPage);
   router.get("/admin/create-user", getCreateUserPage);
   router.post(
@@ -82,7 +86,6 @@ const webRoutes = (app: Express) => {
     fileUploadMiddleware("image", "images/product"),
     postUpdateProduct
   );
-
   router.get("/admin/order", getAdminOrderPage);
 
   app.use("/", router);
